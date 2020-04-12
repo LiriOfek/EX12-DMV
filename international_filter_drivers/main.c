@@ -11,6 +11,19 @@ Purpose: This file run the program that check which person
 #define INITIAL_INDEX (0)
 #define STRING_OLD_ENOUGH_TO_DDRIVE ("%s is old enough to drive!, ")
 #define ENTER ("\n")
+#define PRINT_CUNTRIES ("In %s: ")
+
+#define LIMIT_AGE_IN_ISRAEL (17)
+#define LIMIT_AGE_IN_FRANCE (15)
+#define LIMIT_AGE_IN_EGYPT (18)
+#define LIMIT_AGE_IN_ATLANTIS (30)
+
+#define NUMBER_OF_CUNTRIES (4)
+
+#define ISRAEL ("Israel")
+#define FRANCE ("France")
+#define EGYPT ("Egypt")
+#define ATLANTIS ("Atlantis")
 
 bool is_old_enough_to_drive(int age,
 							int limit_age);
@@ -83,4 +96,51 @@ void filterDriver(char* names[],
 		}
 	}
 	printf(ENTER);
+}
+
+void internationalFilterDrivers(char* names[],
+	int* ages,
+	int size) {
+	/********************************************************\
+	* Function name - internationalFilterDrivers
+	*
+	* Function Purpose - go through the array of cuntries, and for each
+	*					 cuntry check if the people are legal
+	*
+	* Parameters - IN char* names[] - array of names,
+	*			   IN int* ages - array of ages,
+	*			   IN int size - size of arrays
+	*
+	* Return Value - this function has no return value
+	*
+	* Side Effects - this function has no side effects
+	*
+	* Semantics - this function go through the array of cuntries, and for each
+	*			  cuntry call function filterDriver() and check if the people
+	*			  are legal
+	*
+	* Author - Liri
+	\********************************************************/
+	int limit_ages[] = { LIMIT_AGE_IN_ISRAEL ,
+		LIMIT_AGE_IN_FRANCE,
+		LIMIT_AGE_IN_EGYPT,
+		LIMIT_AGE_IN_ATLANTIS };
+	char *cuntries[] = { ISRAEL,
+		FRANCE,
+		EGYPT,
+		ATLANTIS };
+	int index = INITIAL_INDEX;
+	bool(*function_pointer)(int age, int limit_age);
+
+	for (index = INITIAL_INDEX; index < NUMBER_OF_CUNTRIES; ++index) {
+		printf(PRINT_CUNTRIES, cuntries[index]);
+
+		function_pointer = is_old_enough_to_drive;
+
+		filterDriver(names,
+			ages,
+			size,
+			function_pointer,
+			limit_ages[index]);
+	}
 }
