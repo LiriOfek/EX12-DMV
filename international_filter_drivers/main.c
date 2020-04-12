@@ -12,6 +12,7 @@ Purpose: This file run the program that check which person
 #define STRING_OLD_ENOUGH_TO_DDRIVE ("%s is old enough to drive!, ")
 #define ENTER ("\n")
 #define PRINT_CUNTRIES ("In %s: ")
+#define SIZE_OF_ARRAY_NAMES_AND_AGES (5)
 
 #define LIMIT_AGE_IN_ISRAEL (17)
 #define LIMIT_AGE_IN_FRANCE (15)
@@ -55,10 +56,10 @@ bool is_old_enough_to_drive(int age,
 }
 
 void filterDriver(char* names[],
-	int* ages,
-	int size,
-	bool(*function_pointer)(int age, int limit_age),
-	int limit_age) {
+					int* ages,
+					int size,
+					bool(*function_pointer)(int age, int limit_age),
+					int limit_age) {
 	/********************************************************\
 	* Function name - filterDriver
 	*
@@ -122,13 +123,13 @@ void internationalFilterDrivers(char* names[],
 	* Author - Liri
 	\********************************************************/
 	int limit_ages[] = { LIMIT_AGE_IN_ISRAEL ,
-		LIMIT_AGE_IN_FRANCE,
-		LIMIT_AGE_IN_EGYPT,
-		LIMIT_AGE_IN_ATLANTIS };
+							LIMIT_AGE_IN_FRANCE,
+							LIMIT_AGE_IN_EGYPT,
+							LIMIT_AGE_IN_ATLANTIS };
 	char *cuntries[] = { ISRAEL,
-		FRANCE,
-		EGYPT,
-		ATLANTIS };
+							FRANCE,
+							EGYPT,
+							ATLANTIS };
 	int index = INITIAL_INDEX;
 	bool(*function_pointer)(int age, int limit_age);
 
@@ -138,9 +139,50 @@ void internationalFilterDrivers(char* names[],
 		function_pointer = is_old_enough_to_drive;
 
 		filterDriver(names,
-			ages,
-			size,
-			function_pointer,
-			limit_ages[index]);
+						ages,
+						size,
+						function_pointer,
+						limit_ages[index]);
 	}
+}
+
+void main() {
+	/********************************************************\
+	* Function name - main
+	*
+	* Function Purpose - run function that check if people are
+	*					 old enough to drive
+	*
+	* Parameters - no Input/Output parameters
+	*
+	* Return Value - there isn't return value
+	*
+	* Side Effects - this function has no side effects
+	*
+	* Semantics - this function check if the people in array are
+	*			  old enough to drive by call to filterDriver
+	*
+	* Author - Liri
+	\********************************************************/
+	char *names[] = { "Liri",
+						"Ofek",
+						"Nir",
+						"Oree",
+						"Dan" };
+
+	int ages[] = { 17,
+					15,
+					18,
+					30,
+					5 };
+	int size = SIZE_OF_ARRAY_NAMES_AND_AGES;
+
+	bool(*function_pointer)(int age, 
+							int limit_age);
+
+	function_pointer = is_old_enough_to_drive;
+
+	internationalFilterDrivers(names,
+								ages,
+								size);
 }
