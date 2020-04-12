@@ -12,6 +12,7 @@ Purpose: This file run the program that check which person
 #define STRING_OLD_ENOUGH_TO_DDRIVE ("%s is old enough to drive!, ")
 #define ENTER ("\n")
 #define LIMIT_AGE_FOR_DRIVING (17)
+#define SIZE_OF_ARRAY_NAMES_AND_AGES (5)
 
 bool is_old_enough_to_drive(int age);
 
@@ -80,4 +81,44 @@ void filterDriver(char* names[],
 		}
 	}
 	printf(ENTER);
+}
+
+void main() {
+	/********************************************************\
+	* Function name - main
+	*
+	* Function Purpose - run function that check if people are
+	*					 old enough to drive
+	*
+	* Parameters - no Input/Output parameters
+	*
+	* Return Value - there isn't return value
+	*
+	* Side Effects - this function has no side effects
+	*
+	* Semantics - this function check if the people in array are
+	*			  old enough to drive by call to filterDriver
+	*
+	* Author - Liri
+	\********************************************************/
+	char *names[] = { "Liri",
+						"Ofek",
+						"Nir",
+						"Oree",
+						"Dan" };
+	int ages[] = { 17,
+					15,
+					18,
+					30,
+					5 };
+	int size = SIZE_OF_ARRAY_NAMES_AND_AGES;
+
+	bool(*function_pointer)(int age);
+
+	function_pointer = is_old_enough_to_drive;
+
+	filterDriver(names,
+		ages,
+		size,
+		function_pointer);
 }
